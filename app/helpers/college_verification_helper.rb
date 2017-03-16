@@ -1,0 +1,2 @@
+module CollegeVerificationHelper
+end

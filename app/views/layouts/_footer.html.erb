@@ -1,0 +1,38 @@
+<!-- Footer -->
+<footer class="page-section bg-gray-lighter footer pb-60" style="padding-top: 60px;">
+    <div class="container">
+        
+        <!-- Footer Logo -->
+        <div class="local-scroll mb-30 wow fadeInUp" data-wow-duration="1.2s">
+            <a href="#top"><img src=<%= image_path("logo-footer-new.png")%> width="78" height="36" alt="" /></a>
+        </div>
+        <!-- End Footer Logo -->     
+
+        
+        <!-- Footer Text -->
+        <div class="footer-text">
+            
+            <!-- Copyright -->
+            <div class="footer-copy font-alt">
+                <a href="http://verifyonline.com" target="_blank">&copy; Verify Online 2015</a>.
+            </div>
+            <!-- End Copyright -->
+            
+            <!-- <div class="footer-made">
+                Made with love.
+            </div> -->
+            
+        </div>
+        <!-- End Footer Text --> 
+        <% if params[:controller] =='landing_page' && params[:action] == 'index' %>
+        <!-- Top Link -->
+         <div class="local-scroll">
+             <a href="#top" class="link-to-top"><i class="fa fa-caret-up"></i></a>
+         </div>
+         <!-- End Top Link -->
+         <% end %>
+        
+     </div>
+    
+</footer>
+<!-- End Footer -->

@@ -1,0 +1,168 @@
+<div class="page" id="top">            
+    <!-- Home Section -->
+    <section class="home-section bg-dark-alfa-50 " style='background-color: #3498DB;' id="home">
+       <div class="container">            
+            <!-- Hero Content -->
+            <div class="home-content">
+                <div class="home-text" style="    padding: 100px 0px 45px 0px;">
+                    
+                    <h1 class="hs-line-8 no-transp font-alt mb-50 mb-xs-30">
+                       <%= current_user.college.name%>
+                    </h1>
+                    <div class="local-scroll hidden-xs">
+                       <%= link_to "Pending Verification", view_verifications_path, :class => "btn btn-mod btn-border-w btn-medium btn-round", :style =>"background: #fff;color: #111;border-color: transparent;" %>
+                        <span>&nbsp;</span>
+                        <%= link_to "Completed Verification", completed_verifications_path, :class => "btn btn-mod btn-border-w btn-medium btn-round" %>
+                        <span>&nbsp;</span>
+                        <%= link_to "Payment Details", payment_details_path, :class => "btn btn-mod btn-border-w btn-medium btn-round" %>
+                    </div>                    
+                </div>
+            </div>
+            <!-- End Hero Content -->            
+       </div>
+    </section>
+    <!-- End Home Section -->
+
+    <!-- Section -->
+    <section class="small-section" id="multi-page">
+        <div class="container relative">            
+            <!--<h2 class="section-title font-alt mb-60 mb-sm-30">
+                Multi Page Demo
+            </h2> -->    
+             <% flash.each do |message_type, message| %>
+                <div class="alert alert-<%= message_type %>"><%= message %></div>
+            <% end %>        
+            <div class="row multi-columns-row ">
+                <%= form_tag(:view_verifications, :method => "get", :html => { :class => 'form contact-form', :id => 'contact_form'}) do %>
+                    <div class="clearfix">                                                  
+                        <div class="form-group row">
+                            <div class="col-md-5">
+                                <input type="text" name="search_tag" id="search_tag" class="input-md round form-control" placeholder="Search by name or hallticket number">
+                            </div>
+                            <div class="col-md-2">
+                                <%= submit_tag "Search", :class => "submit_btn btn btn-mod btn-medium btn-round"%>
+                            </div> 
+                        </div>
+                    </div>
+                <% end %> 
+                <% if @college_verifications.blank? %>    
+                        <div class="jumbotron align-center">
+                            <p>You have no new verification request.</p>
+                        </div>
+                    
+                    
+                    <%else%>
+                         
+                       
+                        <table class="table table-striped ">
+                            <thead style="background: dimgrey; color: white;">
+                              <tr>
+                                <th>Sl. no.</th>
+                                <th>Verification ID</th>
+                                <th>Requested on</th>
+                                <th>Hallticket No</th>
+                                <th>Name</th>
+                                <th>Document</th>
+                                <th>Status</th>
+                                <th></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            <% @college_verifications.each_with_index do |college_verification, i| %>
+                                <%days_diff = (Time.now.beginning_of_day - college_verification.created_at.beginning_of_day).to_i / 86400%>
+                                <tr <%=
+                                if days_diff >= 20
+                                    "class='error'"
+                                elsif days_diff >=10
+                                    "class='warning'"
+                                end%>>
+                                    <td><%=i+1%></td>
+                                    <td style="text-transform: uppercase;"><%=college_verification.verification_token%></td>
+                                    
+                                    <!-- <td><%=local_time(college_verification.created_at + 330.minutes, '%d/%m/%Y %l:%M%p')%> -->
+                                    <td><%=local_time(college_verification.created_at + 330.minutes, '%d/%m/%Y')%>
+                                        <%= if days_diff == 0
+                                                "(Today)"
+                                            elsif days_diff == 1
+                                                "(1 day ago)"
+                                            else 
+                                                "(#{days_diff} days ago)"
+                                            end%></td>
+                                    <td style="text-transform: uppercase;"><%=college_verification.hallticket_no%></td>
+                                    <td><%=college_verification.name%></td>
+                                    <td><a href="<%=college_verification.document_link%> " target="blank"><i class="fa fa-download dark"></i></a></td>                                
+                                    <td><%=college_verification.verification_status.description%></td>
+                                    <td><a class="update_verification_button">Update Status</a></td>
+                                
+
+                                </tr>
+                                <tr class="update_verification_form" style="display: none;">
+                                    <td></td>
+                                    <td colspan="3">
+                                        <div class="edit_form" id="task-form" >
+                                            <div class="form contact-form" id="contact_form">
+                                            <%= form_tag update_path   , :method => :put do%>
+                                                <%= hidden_field_tag :id, college_verification.id %>
+                                                <div class="clearfix">
+                                                    <div class="row align-center "> 
+                                                        <div class="col-sm-4 mb-40">  
+                                         
+                                                            <!-- <%=label_tag 'Course'%> -->
+                                                            <div class="field" style="margin-bottom: 10px;">
+                                                                <%= select_tag :verification_status_id, options_from_collection_for_select(VerificationStatus.all, "id", "description"), {:class => "input-md form-control", :title => "Verification Status", :style => "text-transform: none !important;"} %>    
+                                                            </div>
+                                                            <div class="field" style="margin-bottom: 10px;">
+                                                                <%= text_field_tag :course, college_verification.course, :class => "input-md round form-control", :placeholder => "Course", :title => "Course", :pattern => ".{1,100}", :style => "text-transform: none !important;" %>
+                                                            </div>
+                                                            <!-- <%=label_tag 'Type of Studies'%> -->
+                                                            <div class="field" style="margin-bottom: 10px;">
+                                                                <%= text_field_tag :type_of_studies, college_verification.type_of_studies, :class => "input-md round form-control", :placeholder => "Type of Studies", :title => "Type of studies", :pattern => ".{1,100}", :style => "text-transform: none !important;" %>
+                                                            </div>
+                                                            <!-- <%=label_tag 'Course Duration'%> -->
+                                                            <div class="field" style="margin-bottom: 10px;">
+                                                                <%= text_field_tag :course_duration, college_verification.course_duration, :class => "input-md round form-control", :placeholder => "Year of Passing", :title => "Course Duration", :pattern => ".{1,100}", :style => "text-transform: none !important;" %>
+                                                            </div>
+                                                            <!-- <%=label_tag 'Class Awarded'%>    -->
+                                                            
+                                                        </div>
+
+
+                                                        <div class="col-sm-4 mb-40">
+                                                            <!-- <%=label_tag 'Status'%> -->
+                                                            <div class="field" style="margin-bottom: 10px;">
+                                                                <%= text_field_tag :class_awarded, college_verification.class_awarded, :class => "input-md round form-control", :title => "Class Awarded", :placeholder => "Class Awarded", :pattern => ".{1,100}", :style => "text-transform: none !important;" %>
+                                                            </div>
+                                                            <!-- <%=label_tag 'Remarks'%>                                  -->
+                                                            <div class="field" style="margin-bottom: 10px;">
+                                                                <%= text_area_tag :remarks, college_verification.remarks, :class => "input-md round form-control", :placeholder => "Remarks", :title => "Remarks", :pattern => ".{1,300}", :style => "resize: none; height: 131px; text-transform: none !important;"  %>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 mb-40">
+                                                            <!-- Send Button -->
+                                                            <div class="pt-10" style="margin-top: 131px;">
+                                                                <%= submit_tag "UPDATE", :class => "submit_btn btn btn-mod btn-medium btn-round", :id => "update-btn" %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <%end %> 
+                                            </div>
+                                                                        
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                              
+                            <% end %>
+                            </tbody>
+                        </table>
+                        <%= will_paginate @college_verifications %>
+
+                    <%end%>
+                
+                
+            </div>            
+        </div>
+    </section>
+    <!-- End Section -->
+</div>

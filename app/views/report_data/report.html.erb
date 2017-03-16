@@ -1,0 +1,160 @@
+<style>
+	*{
+		font-size: 20px !important;
+	}
+	.bordered-table, .bordered-table th, .bordered-table td{
+		border: 1px solid black !important;
+		border-collapse: collapse !important;
+		padding: 5px !important;
+	}
+</style>
+<table style="width: 1000px;">
+	<tr>
+		<td colspan="2" align="right">
+			<%=local_time(Time.now.in_time_zone("Chennai") + 330.minutes)%>&nbsp;IP Address&nbsp;<%=@client_ip%><br>
+		</td>
+	</tr>
+	<tr class="report_letter_head" >
+		<td style="width:100%; max-width: 1000px; height: auto;" colspan="2"><img src="<%=@college.report_datum.header.url(:medium)%>"/></td>
+	</tr>
+
+	<tr>
+		<td><br></td>
+	</tr>
+	<tr>
+		<td style="white-space: pre-wrap;"><%=@college.report_datum.from_address%></td>
+		<td align="right" style="text-transform: uppercase;">
+			<%=local_time(Time.now.in_time_zone("Chennai") + 330.minutes, '%d/%m/%Y')%> <br>
+			Verification ID <%=("<strong>#{@verification_stub.verification_token}</strong>").html_safe%>
+		</td>
+	</tr>
+	
+	<tr>
+		<td><br></td>
+	</tr>
+	<tr>
+		<td align="center" style="width:100%;" colspan="2"><%=
+			if @college.report_datum.letter_title.include?('_REQUEST_DATE_')
+				(@college.report_datum.letter_title.gsub! '_REQUEST_DATE_',local_time(@verification_stub.created_at + 330.minutes, '%d/%m/%Y')).html_safe
+			else
+				@college.report_datum.letter_title
+			end
+			%>
+		</td>
+	</tr>
+	<tr>
+		<td><br></td>
+	</tr>
+	<tr>
+		<td style="text-transform: capitalize;">To,<br><%=
+			if @college.report_datum.to_address.include?('_USER_TO_ADDRESS_')
+				(@college.report_datum.to_address.gsub! '_USER_TO_ADDRESS_', "#{@user.name}<br/>#{@user.address}<br/>#{@user.city} - #{@user.pincode}<br/>#{@user.state}").html_safe
+			else
+				@college.report_datum.to_address
+			end %>
+		</td>
+	</tr>
+
+	<tr>
+		<td><br></td>
+	</tr>
+	<tr>
+		<td>Sir/Madam,</td>
+	</tr>
+
+	<tr>
+		<td><br></td>
+	</tr>
+	<tr>
+		<td align="center" style="width:100%;" colspan="2"><%=("<strong>#{@college.report_datum.subject}</strong>").html_safe%></td>
+	</tr>
+
+	<tr>
+		<td><br></td>
+	</tr>
+	<tr>
+		<td style="width:100%; white-space: pre-wrap;" colspan="2"><%=
+			if @college.report_datum.body.include?('_STATUS_')
+				(@college.report_datum.body.gsub! '_STATUS_', "<strong>#{@verification_stub.verification_status.description}</strong>" ).html_safe
+			else
+				@college.report_datum.body
+			end %></td>
+	</tr>
+
+	<tr>
+		<td><br></td>
+	</tr>
+
+	<tr>
+		<td colspan="2">
+			<table class="bordered-table" width="100%" style="width:100%;">
+				<tr>
+					<th align="left">S.No.</th>
+					<th align="left">Name</th>
+					<th align="left">Course</th>
+					<th align="left">HT Number/ Reg.No.</th>
+					<th align="left">Year of passing</th>
+					<th align="left">Class awarded</th>
+					<th align="left">Type of Study</th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td><%=@verification_stub.name%></td>
+					<td><%=
+						if @verification_stub.course.blank?
+							"N/A"
+						else
+							@verification_stub.course
+						end%></td>
+					<td style="text-transform: uppercase;"><%=@verification_stub.hallticket_no%></td>
+					<td><%=
+						if @verification_stub.course_duration.blank?
+							"N/A"
+						else
+							@verification_stub.course_duration
+						end%></td>
+					<td><%=
+						if @verification_stub.class_awarded.blank?
+							"N/A"
+						else
+							@verification_stub.class_awarded
+						end%></td>
+					<td><%=
+						if @verification_stub.type_of_studies.blank?
+							"N/A"
+						else
+							@verification_stub.type_of_studies
+						end%></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	
+	<%if !@verification_stub.remarks.blank? %>
+		<tr>
+			<td><br></td>
+		</tr>
+		<tr>
+			<td style="width:100%;" colspan="2"><strong>Remarks:&nbsp;</strong><%=@verification_stub.remarks%></td>
+		</tr>
+	<%end%>
+
+	<tr>
+		<td><br><br></td>
+	</tr>
+	<tr>
+		<td>Yours faithfully,</td>
+	</tr>
+	<tr>
+		<td><br></td>
+	</tr>
+	<tr class="report_letter_head">
+		<td><img src="<%=@college.report_datum.signature.url(:medium)%>"/></td>
+	</tr>
+	<tr>
+		<td><br></td>
+	</tr>
+	<tr>
+		<td style="white-space: pre-wrap;"><%=@college.report_datum.designation%></td>
+	</tr>
+</table>

@@ -1,0 +1,127 @@
+<!-- Navigation panel -->
+<nav class="main-nav stick-fixed">
+
+    <div class="full-wrapper relative clearfix">
+        <!-- Logo ( * your text or image into link tag *) -->
+        <div class="nav-logo-wrap local-scroll"> 
+                <%= link_to image_tag("logo-white-new.png", alt: "Verify online logo", style: "padding: 9px;"), root_url, method: :get, class: "logo" %>
+        </div>
+
+           
+      
+        <div class="mobile-nav">     
+        
+            <i class="fa fa-bars"></i>
+        </div>
+        <!-- Main Menu -->
+        <div class="inner-nav desktop-nav">
+            <ul class="clearlist scroll-nav local-scroll">
+
+                <% if params[:controller] =='landing_page' && params[:action] == 'index' %>
+                    <li><a href="#home" class="active">Home</a></li>
+                <% else %> 
+                    <li><%= link_to "Home", root_url,method: :get %></li>
+                <% end %>
+
+                
+
+                <% if logged_in? %>                  
+                    <% if is_college_admin?  %>
+                        <% if params[:controller] =='college_verification'  %>
+                            <li><%= link_to "College", view_verifications_path, :class => "active" %></li>    
+                        <%else%>
+                            <li><%= link_to "College", view_verifications_path %></li>    
+                        <%end%>
+                    <%else%>
+                        <% if params[:controller] =='student_verification'  %>
+                            <li><%= link_to "Dashboard", apply_path, :class => "active" %></li>
+                        <%else%>
+                            <li><%= link_to "Dashboard", apply_path%></li>
+                        <%end%> 
+                    <%end%>
+
+                <% end %>
+
+                <% if params[:controller] =='landing_page' && params[:action] == 'index' %>
+                    <!-- <li><a href="#about">About</a></li> -->
+                    <li><a href="#contact">Contact Us</a></li>
+                <%else%>
+                    <li><%= link_to "Contact Us", "#{root_url}/#contact",method: :get %></li>
+                <% end %>
+                
+                <li>
+                    <a href="#" class="mn-has-sub"><i class="fa fa-search"></i> E-Verify Status</a>
+                    <ul class="mn-sub">
+                        <li>
+                            <div class="mn-wrap">
+                                <form id="verify-status" method="post" class="form">
+                                    <div class="search-wrap">
+                                        <button class="search-button animate" type="submit" title="Check">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                        <input type="text" id="everify" name="everify" class="form-control search-field" autocomplete="false" placeholder="Verification ID">
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+
+       
+                <% if logged_in? %>
+                        
+                    <li>
+                        <a href="#" class="mn-has-sub"><div class="icon-profile-male" style="margin-right:5px;"></div><%= current_user.name %> <i class="fa fa-angle-down"></i></a>                            
+                        <!-- Sub -->
+                        <ul class="mn-sub to-left">
+                            
+                            <% if is_college_admin?  %>
+                                <li><%= link_to "Report Template", report_data_url %></li>
+                            <%end%>
+                            
+                            <li><%= link_to "Profile", edit_user_path(current_user) %></li>
+                            <li role="separator" class="divider"></li>
+                            <li><%= link_to "Logout", logout_path, method: :delete %></li>   
+                            
+                        </ul>
+                        <!-- End Sub -->                                
+                    </li>
+
+                    <!-- <li><%= link_to "Logout", logout_path, method: :delete %></li>  -->
+                <% else %>
+                    <% if params[:controller] != 'sessions' %>           
+                        <li>
+                            <%= link_to(login_path) do %>
+                                <span class="btn btn-mod btn-border btn-circle btn-small">Login</span>
+                            <%end%>
+                        </li>      
+                    <% end %>
+                <% end %>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- End Navigation panel --> 
+
+
+<div id="eVerifyModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="eVerifyModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <p class="modal-title font-alt">Verification status</p>
+            </div>
+            <div class="modal-body black">
+                <br>
+                <p class="modal-title" id="ev_verify_status">Verification status</p><br>
+                <div id="ev_success_content">
+                    <p>Name: <span id="ev_name" style="font-weight: bold;"></span></p>
+                    <p>Hallticket / Reg No: <span id="ev_hallticket_no" style="font-weight: bold;"></span></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

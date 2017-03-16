@@ -1,0 +1,104 @@
+<% provide(:title, 'Profile') %>
+
+ <section class="home-section bg-dark-alfa-50 " data-background=<%=  asset_url("full-width-images/landing.jpg")%> style='background-image:url(<%= asset_url("full-width-images/landing.jpg")%>)' id="home">
+       <div class="container">            
+            <!-- Hero Content -->
+            <div class="home-content">
+                <div class="home-text" style="    padding: 100px 0px 45px 0px;">
+                    
+                    <h1 class="hs-line-8 no-transp font-alt mb-50 mb-xs-30">
+                       Profile | <%=current_user.email%>
+                    </h1>                    
+                                      
+                </div>
+            </div>
+            <!-- End Hero Content -->            
+       </div>
+    </section>
+
+<section class="page-section login-section">
+    
+    <div class="container relative">
+        
+       
+        <div class="row" style ="padding:0px 10px;">
+            <div class="col-md-8 col-md-offset-2">
+            <% flash.each do |message_type, message| %>
+                <div class="alert alert-<%= message_type %>"><%= message %></div>
+            <% end %>
+            <!--     <h2 class="mt-0 font-alt">Student</h2> -->
+                <%= form_for(@user,  :html => {:class => 'form contact-form'}) do |f| %>
+                    <!-- <form class="form contact-form" id="contact_form"> -->
+                    <div class="clearfix">    
+                        <div class="col-md-6">                                              
+
+                            <div class="form-group">
+                                <%= f.text_field :name , :class => "input-md round form-control",:placeholder =>"Name", :pattern=>".{1,100}" %>
+                            </div> 
+
+                            <div class="form-group">
+                                <%= f.text_field :phone , :class => "input-md round form-control",:placeholder =>"Phone", :type => "tel", :pattern=>".{5,100}",:required => true %>
+                            </div>
+                            
+                            <!-- Password -->
+                            <div class="form-group">                       
+                                
+                                <%= f.password_field :password , :class => "input-md round form-control",:placeholder =>"Password", :pattern=>".{5,100}"%>
+                            </div>
+
+                            <div class="form-group">                       
+                                
+                                <%= f.password_field :password_confirmation , :class => "input-md round form-control",:placeholder =>"Confirm Password", :pattern=>".{5,100}"%>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <%= f.text_area :address , :class => "input-md round form-control",:placeholder =>"Address", :required => true, :rows => "3", :style => "height: 83px;" %>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <%= f.text_field :city , :class => "input-md round form-control",:placeholder =>"City", :type => "text", :required => true %>
+                                    </div> 
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <%= f.text_field :pincode , :class => "input-md round form-control",:placeholder =>"Pincode", :type => "number", :pattern=>".{6}",:required => true %>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <%= f.text_field :state , :class => "input-md round form-control",:placeholder =>"State", :type => "text", :required => true %>
+                                    </div> 
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <%= f.text_field :country , :class => "input-md round form-control",:placeholder =>"Country", :type => "text", :required => true %>
+                                    </div>
+                                </div>
+                            </div> 
+
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="clearfix">
+                        <!-- Send Button -->
+                        <div class="align-right pt-10 form-group">
+                            
+                            <%= f.submit "Update", :class => "submit_btn btn btn-mod btn-medium btn-round"%>
+                        </div>               
+                    </div>            
+                    <!-- </form> -->
+                <% end %>           
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+
+

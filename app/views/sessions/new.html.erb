@@ -1,0 +1,65 @@
+<% provide(:title, 'Log in') %>
+
+<section class="page-section login-section">
+    
+    <div class="container relative">
+        
+        <h2 class="section-title font-alt mb-70 mb-sm-40">
+            Login here
+        </h2>
+        <div class="row" style ="padding:0px 10px;">
+            <div class="col-md-5 col-md-offset-3">
+            <% flash.each do |message_type, message| %>
+                <div class="alert alert-<%= message_type %>"><%= message %></div>
+            <% end %>
+            <!--     <h2 class="mt-0 font-alt">Student</h2> -->
+                <%= form_for(:session, url: login_path, :html => {:class => 'form contact-form', :id => 'contact_form'}) do |f| %>
+                    <!-- <form class="form contact-form" id="contact_form"> -->
+                    <div class="clearfix">                                                  
+                        <!-- Email -->
+                        <div class="form-group">
+                            <%= f.text_field :email , :class => "input-md round form-control",:placeholder =>"Email", :pattern=>".{5,100}" %>
+                        </div> 
+
+                        <!-- Password -->
+                        <div class="form-group">                       
+                            
+                            <%= f.password_field :password , :class => "input-md round form-control",:placeholder =>"Password", :pattern=>".{5,100}"%>
+                        </div>
+                        
+                        <div class="form-group" style="margin: 15px 0 0 0;">                       
+                            
+                            <%= f.label :remember_me, class: "checkbox inline " do %>
+                                
+                                <%= f.check_box :remember_me %>
+                                <span class="help-block"  style="    opacity: .65;    text-decoration: none;    font-weight: 400;">Remember me </span>
+                            <% end %>
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="clearfix form-tip">
+                        <p style="font-size: 14px;"><%= link_to "Forgot password?", new_password_reset_path %></p>
+                        <!-- Send Button -->
+                        <div class="align-right pt-10 form-group">
+                            
+                            <%= f.submit "Login", :class => "submit_btn btn btn-mod btn-medium btn-round"%>
+                        </div>
+                        
+                        <!-- Inform Tip -->                                        
+                        <div class="form-tip pt-20 form-group">
+                            <p style="font-size: 14px;">New user? <%= link_to "Sign up now!", signup_path %></p>
+                        </div>                
+                    </div>            
+                        
+                        
+                    <div id="result"></div>
+                    <!-- </form> -->
+                <% end %>           
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+

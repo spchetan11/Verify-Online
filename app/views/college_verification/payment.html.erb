@@ -1,0 +1,115 @@
+<div class="page" id="top">            
+    <!-- Home Section -->
+    <section class="home-section bg-dark-alfa-50 " style='background-color: #3498DB;' id="home">
+       <div class="container">            
+            <!-- Hero Content -->
+            <div class="home-content">
+                <div class="home-text" style="    padding: 100px 0px 45px 0px;">
+                    
+                    <h1 class="hs-line-8 no-transp font-alt mb-50 mb-xs-30">
+                       <%= current_user.college.name%>
+                    </h1>                    
+                    <div class="local-scroll hidden-xs">
+                       <%= link_to "Pending Verification", view_verifications_path, :class => "btn btn-mod btn-border-w btn-medium btn-round" %>
+                        <span>&nbsp;</span>
+                        <%= link_to "Completed Verification", completed_verifications_path, :class => "btn btn-mod btn-border-w btn-medium btn-round" %>
+                        <span>&nbsp;</span>
+                        <%= link_to "Payment Details", payment_details_path, :class => "btn btn-mod btn-border-w btn-medium btn-round", :style =>"background: #fff;color: #111;border-color: transparent;" %>
+                    </div>                    
+                </div>
+            </div>
+            <!-- End Hero Content -->            
+       </div>
+    </section>
+    <!-- End Home Section -->
+
+
+    <!-- Section -->
+    <section class="small-section" id="multi-page">
+        <div class="container relative">                     
+            <div class="row">
+                <!--<%= form_tag(:payment_details, :method => "get", :html => { :class => 'form contact-form', :id => 'contact_form'}) do %>
+                    <div class="clearfix">                                                  
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <input type="text" name="search_tag" id="search_tag" class="input-md round form-control" placeholder="Search by Transaction ID">
+                            </div>
+                            <div class="col-md-2">
+                                <%= submit_tag "Search", :class => "submit_btn btn btn-mod btn-medium btn-round"%>
+                            </div> 
+                        </div>
+                    </div>
+                <% end %>
+                <hr>-->
+                <%= form_tag(:payment_details, :method => "get", :html => { :class => 'form contact-form', :id => 'payment_form'}) do %>
+                    <div class="clearfix">                                                  
+                        <div class="form-group row">
+                            <div class="col-md-2" style="font-size: 16px; color: #4C4A47; margin-top: 6px;">Search date range</div>
+                            <div class="col-md-4">
+                                <div class="input-group input-daterange">
+                                    <input name="fromdate" id="fromdate" type="text" class="form-control" value=<%=@searched==true ? @fromDate: ""%>>
+                                    <span class="input-group-addon">to</span>
+                                    <input name="todate" id="todate" type="text" class="form-control" value=<%=@searched==true ? @toDate: ""%>>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <%= submit_tag "Search", :class => "submit_btn btn btn-mod btn-medium btn-round"%>
+                            </div> 
+                        </div>
+                    </div>
+                <% end %> 
+                
+                <div class="mb-40 table-responsive " style="margin-top: 20px;">
+                    <% if !@payments.present? %>    
+                        <% if @searched == true %>    
+                            <div class="jumbotron align-center">
+                                <p>No payments match search criteria.</p>
+                            </div>
+                        <%end%>
+                        
+                    <%else%>
+                        
+                        <table class="table table-striped ">
+                            <thead style="background: dimgrey; color: white;">
+                              <tr>
+                                <th>Sl. no.</th>
+                                <th>Verification ID</th>
+                                <th>Transaction ID</th>
+                                <th>College/ University Name</th>
+                                <th>Student Name</th>
+                                <th>HT Number/ Reg. No.</th>
+                                <th>Transaction Date and Time</th>
+                                <th>Amount Paid</th>
+                                <th>Paid on</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            <% @payments.each_with_index do |payment, i| %>
+                                <%
+                                    @verification_stub = VerificationRequest.find_by(payment_id: payment.id)
+                                    @college = College.find_by(id: @verification_stub.college_id)
+                                %>
+                              <tr>
+                                <td><%=i+1%></td>
+                                <td style="text-transform: uppercase;"><%=@verification_stub.verification_token%></td>
+                                <td style="text-transform: uppercase;"><%=payment.transaction_id%></td>
+                                <td><%=@college.name%></td>
+                                <td><%=@verification_stub.name%></td>
+                                <td style="text-transform: uppercase;"><%=@verification_stub.hallticket_no%></td>
+                                <td><%=local_time(payment.created_at + 330.minutes, '%d/%m/%Y %l:%M%p')%></td>
+                                <td>Rs <%=@college.verification_amount%></td>                       
+                                <td><%=local_time(payment.created_at + 330.minutes, '%d/%m/%Y')%>
+                              </tr>
+                              
+                            <% end %>
+                            </tbody>
+                        </table>
+                        <%= will_paginate @payments %>
+
+                    <%end%>
+                </div>
+            </div>           
+        </div>
+    </section>
+    <!-- End Section -->
+</div>

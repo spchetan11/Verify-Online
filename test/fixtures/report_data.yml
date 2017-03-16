@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  college_id: 
+  from_address: MyText
+  to_address: MyText
+  letter_title: MyString
+  subject: MyString
+  body: MyText
+  designation: MyText
+  header: 
+  signature: 
+
+two:
+  college_id: 
+  from_address: MyText
+  to_address: MyText
+  letter_title: MyString
+  subject: MyString
+  body: MyText
+  designation: MyText
+  header: 
+  signature: 

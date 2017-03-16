@@ -1,0 +1,30 @@
+<% provide(:title, 'Forgot password') %>
+<section class="page-section">
+	
+
+	<div class="row">
+	  <div class="col-md-6 col-md-offset-3">
+	  <h1 class="hs-line-8 no-transp font-alt mb-20 mb-xs-20">Forgot password</h1>
+	  	<% flash.each do |message_type, message| %>
+            <div class="alert alert-<%= message_type %>"><%= message %></div>
+          <% end %>
+	    <%= form_for(:password_reset, url: password_resets_path) do |f| %>
+	      
+		<div class="clearfix">                                                   
+			<!-- Email -->
+			<div class="form-group">
+			<%= f.text_field :email , :class => "input-md round form-control",:placeholder =>"Email", :pattern=>".{5,100}" %>
+			</div>		        
+		</div>
+		<div class="clearfix">                                                   
+			<!-- Send Button -->
+            <div class="align-right pt-10 form-group">
+                <!-- <button class="submit_btn btn btn-mod btn-medium btn-round" id="submit_btn">Submit Message</button> -->
+                <%= f.submit "Submit", :class => "submit_btn btn btn-mod btn-medium btn-round"%>
+            </div>	        
+		</div>	      
+	      
+	    <% end %>
+	  </div>
+	</div>
+</section>

@@ -1,0 +1,440 @@
+
+<%= content_tag "div", id: "colleges", data: {url: @all_colleges } do %><% end %>
+<!-- Page Wrap -->
+<div class="page" id="top">
+    <!-- Page Loader -->        
+    <div class="page-loader">
+        <div class="loader">Loading...</div>
+    </div>
+    <!-- End Page Loader -->
+    <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
+            
+    <!-- Home Section -->
+    <section class="home-section bg-dark-alfa-70 parallax-2"  style='/*background-color: #174969;*/ background-image:url(<%= image_path("backgrounds/home.jpg")%>) ' id="home" data-background=<%= image_path("backgrounds/home.jpg")%> >
+        <div class="js-height-full">
+            
+            <!-- Hero Content -->
+            <div class="home-content container">
+                <div class="home-text">
+                    
+                    <h1 style="font-size: 20px;" class="hs-line-8 font-alt mb-50 mb-xs-30">
+                        Verification Simplified
+                    </h1>
+                    
+                    <h2 style="font-size: 40px;" class="hs-line-11 font-alt mb-50 mb-xs-30">
+                        Verify Online
+                    </h2>
+                    
+
+                    <div id="search-container" class="form align-center" style="position: absolute; width: 100%;">
+                        <div class="mb-20"` style="max-width: 387px; margin: 5px auto;">
+                            <input id="college-search" placeholder="Search Colleges" class="search-field form-control input-md round mb-xs-10" type="text" style="max-width: 100%;"/>
+                            <div id="search-result" style="width: 100%;text-align: left;"></div>
+                        </div>
+                        <%= link_to "View all colleges",search_page_path,:style=>"font-size: 18px;"%>  
+                    </div>
+                    <!-- <i style="display: none; -webkit-animation: spinner 3s infinite linear; -moz-animation: spinner 3s infinite linear; -ms-animation: spinner 3s infinite linear; -o-animation: spinner 3s infinite linear; animation: spinner 3s infinite linear;" id="e_verification_loader" class="fa fa-gear dark"></i> -->
+                        </div>
+                    </div>
+                    
+
+                </div>
+            </div>
+            <!-- End Hero Content -->
+            
+            <!-- Scroll Down -->
+            <div class="local-scroll">
+                <a href="#about" class="scroll-down"><i class="fa fa-angle-down scroll-down-icon"></i></a>
+            </div>
+            <!-- End Scroll Down -->
+            
+        </div>
+    </section>
+    <!-- End Home Section -->
+    
+    <!-- About Section -->
+    <section class="page-section" id="about">
+        <div class="container relative">
+            
+            <h2 class="section-title font-alt align-left mb-70 mb-sm-40">
+                About Us
+            </h2>
+            
+            <div class="section-text mb-50 mb-sm-20">
+                <div class="row">
+                
+                    <div class="col-md-4">
+                        <blockquote>
+                            <p>
+                            Today knowledge has power. It controls access to opportunity and advancement.
+                            </p>
+                            <!-- <footer>
+                                Kishore
+                            </footer> -->
+                        </blockquote>
+                    </div>
+                    
+                    <div class="col-md-8 col-sm-6 mb-sm-50 mb-xs-30" style="text-align: justify;">
+                        The role of education verification is mandatory and difficult for organizations to meet industry standards while hiring. Enquiring through phone, email and fax, couriering the documents, running to banks to raise drafts is a tedious process for employers. Verify Online is a brainchild of our founders who are in to HR Support Services and Background Verification services for several years, all to simplify the process of education verification. 
+                    </div>
+                    
+                    <!-- <div class="col-md-4 col-sm-6 mb-sm-50 mb-xs-30">
+                        Etiam sit amet fringilla lacus. Pellentesque suscipit ante at ullamcorper pulvinar neque porttitor. Integer lectus. Praesent sed nisi eleifend, fermentum orci amet, iaculis libero. Donec vel ultricies purus. Nam dictum sem, eu aliquam.
+                    </div> -->
+                    
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    <!-- End About Section -->
+    
+    <!-- Divider -->
+    <hr class="mt-0 mb-0 "/>
+    <!-- End Divider -->
+    
+    <section class="page-section pt-0 pb-0 banner-section bg-dark-alfa-50" data-background=<%= image_path("backgrounds/collaborate.jpg")%>   style='background-image:url(<%= image_path("backgrounds/collaborate.jpg")%>)'    >
+        <div class="container relative">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="mt-140 mt-lg-80 mb-140 mb-lg-80">
+                        <div class="banner-content align-centre">
+                            <h3 class="banner-heading font-alt">Looking to register your college with us?</h3>
+                            <div class="local-scroll">
+                                <a href="#contact" class="btn btn-mod btn-w btn-medium btn-round">Lets talk</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page-section">
+        <div class="container relative">
+            
+            <h2 class="section-title font-alt mb-70 mb-sm-40">
+                Why Universities should choose us?
+            </h2>
+            <div class="row multi-columns-row alt-features-grid">
+                <div class="col-sm-6 col-md-4 col-lg-4">
+                    <div class="alt-features-item align-center">
+                        <div class="alt-features-icon">
+                            <span class="icon-phone"></span>
+                        </div>
+                        <h3 class="alt-features-title font-alt">Avoid verification calls and emails</h3>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-4">
+                    <div class="alt-features-item align-center">
+                        <div class="alt-features-icon">
+                            <span class="icon-wallet"></span>
+                        </div>
+                        <h3 class="alt-features-title font-alt">Competing prices and minimal human resources</h3>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-4">
+                    <div class="alt-features-item align-center">
+                        <div class="alt-features-icon">
+                            <span class="icon-linegraph"></span>
+                        </div>
+                        <h3 class="alt-features-title font-alt">High security and revenue generation</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="page-section pt-0 pb-0 banner-section bg-dark-alfa-50" style="background-color: #174969;">
+        <div class="container relative">
+            <div class="row align-right">
+                <div>
+                    <div class="mt-140 mt-lg-80 mb-140 mb-lg-80">
+                        <div class="banner-content align-centre">
+                            <h3 class="banner-heading font-alt">Wan't to get you documents verified?</h3>
+                            <div class="local-scroll">
+                                <a href="/login" class="btn btn-mod btn-w btn-medium btn-round">Register Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="page-section">
+        <div class="container relative">
+            
+            <h2 class="section-title font-alt mb-70 mb-sm-40">
+                Why users should choose us?
+            </h2>
+            <div class="row multi-columns-row alt-features-grid">
+                <div class="col-sm-6 col-md-4 col-lg-4">
+                    <div class="alt-features-item align-center">
+                        <div class="alt-features-icon">
+                            <span class="icon-clock"></span>
+                        </div>
+                        <h3 class="alt-features-title font-alt">Fast turn-around time</h3>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-4">
+                    <div class="alt-features-item align-center">
+                        <div class="alt-features-icon">
+                            <span class="icon-chat"></span>
+                        </div>
+                        <h3 class="alt-features-title font-alt">24x7 Email Support</h3>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-4 col-lg-4">
+                    <div class="alt-features-item align-center">
+                        <div class="alt-features-icon">
+                            <span class="icon-layers"></span>
+                        </div>
+                        <h3 class="alt-features-title font-alt">Instant email reports</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <!-- <section class="page-section fullwidth-slider" style="background-color: #174969;" data-background=<%= image_path("full-width-images/section-bg-3.jpg")%> >
+        
+        <div>
+            <div class="container relative">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 align-center">
+                        <div class="section-icon">
+                            <span class="icon-quote"></span>
+                        </div>
+                        <h3 class="small-title font-alt white">What people say?</h3>
+                        <blockquote class="testimonial white">
+                            <p>
+                                Phasellus luctus commodo ullamcorper a posuere rhoncus commodo elit. Aenean congue,
+                                risus utaliquam dapibus. Thanks!
+                            </p>
+                            <footer class="testimonial-author">
+                                John Doe, doodle inc.
+                            </footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div>
+            <div class="container relative">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 align-center">
+                        <div class="section-icon">
+                            <span class="icon-quote"></span>
+                        </div>
+                        <h3 class="small-title font-alt">What people say?</h3>
+                        <blockquote class="testimonial white">
+                            <p>
+                                Phasellus luctus commodo ullamcorper a posuere rhoncus commodo elit. Aenean congue,
+                                risus utaliquam dapibus. Thanks!
+                            </p>
+                            <footer class="testimonial-author">
+                                John Doe, doodle inc.
+                            </footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div>
+            <div class="container relative">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 align-center">
+                        <div class="section-icon">
+                            <span class="icon-quote"></span>
+                        </div>
+                        <h3 class="small-title font-alt">What people say?</h3>
+                        <blockquote class="testimonial white">
+                            <p>
+                                Phasellus luctus commodo ullamcorper a posuere rhoncus commodo elit. Aenean congue,
+                                risus utaliquam dapibus. Thanks!
+                            </p>
+                            <footer class="testimonial-author">
+                                John Doe, doodle inc.
+                            </footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    
+    <!-- Newsletter Section -->
+    <!-- <section class="small-section bg-gray-lighter">
+        <div class="container relative">
+            
+            <form class="form align-center" id="mailchimp">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        
+                        <div class="newsletter-label font-alt">
+                            Stay informed with our newsletter
+                        </div>
+                        
+                        <div class="mb-20">
+                            <input placeholder="Enter Your Email" class="newsletter-field form-control input-md round mb-xs-10" type="email" pattern=".{5,100}" required/>
+                            
+                            <button type="submit" class="btn btn-mod btn-medium btn-round mb-xs-10">
+                                Subscribe
+                            </button>
+                        </div>
+                        
+                        <div class="form-tip">
+                            <i class="fa fa-info-circle"></i> Please trust us, we will never send you spam
+                        </div>
+                        
+                        <div id="subscribe-result"></div>
+                        
+                    </div>
+                </div>
+            </form>
+            
+        </div>
+    </section> -->
+    <!-- End Newsletter Section -->
+    
+    
+    <!-- Contact Section -->
+    <section class="page-section" id="contact">
+        <div class="container relative">
+            
+            <h2 class="section-title font-alt mb-70 mb-sm-40">
+                Contact
+            </h2>
+            
+            <div class="row mb-60 mb-xs-40">
+                
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="row">
+                        
+                        <!-- Phone -->
+                        <div class="col-sm-6 col-lg-4 pt-20 pb-20 pb-xs-0">
+                            <div class="contact-item">
+                                <div class="ci-icon">
+                                    <i class="fa fa-phone"></i>
+                                </div>
+                                <div class="ci-title font-alt">
+                                    Call Us
+                                </div>
+                                <div class="ci-text">
+                                    +91 910 077 2124 <br> +91 910 077 2126
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Phone -->
+                        
+                        <!-- Address -->
+                        <div class="col-sm-6 col-lg-4 pt-20 pb-20 pb-xs-0">
+                            <div class="contact-item">
+                                <div class="ci-icon">
+                                    <i class="fa fa-map-marker"></i>
+                                </div>
+                                <div class="ci-title font-alt">
+                                    Address
+                                </div>
+                                <div class="ci-text">
+                                    467, Ayyappa society, madhapur, Hyderabad, Telangana - 500081
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Address -->
+                        
+                        <!-- Email -->
+                        <div class="col-sm-6 col-lg-4 pt-20 pb-20 pb-xs-0">
+                            <div class="contact-item">
+                                <div class="ci-icon">
+                                    <i class="fa fa-envelope"></i>
+                                </div>
+                                <div class="ci-title font-alt">
+                                    Email
+                                </div>
+                                <div class="ci-text">
+                                    <a href="mailto:support@verifyonline.in">support@verifyonline.in</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Email -->
+                        
+                    </div>
+                </div>
+                
+            </div>
+            
+            <!-- Contact Form -->                            
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <%= form_tag(:contact_create, :method => "post", :html => { :class => 'form contact-form', :id => 'contact_form'}) do %>
+                        <div class="clearfix">
+                            
+                            <div class="cf-left-col">
+                                
+                                <!-- Name -->
+                                <div class="form-group">
+                                    <input type="text" name="name" id="name" class="input-md round form-control" placeholder="Name" required>
+                                </div>
+                                
+                                <!-- Email -->
+                                <div class="form-group">
+                                    <input type="email" name="email" id="email" class="input-md round form-control" placeholder="Email" required>
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="cf-right-col">
+                                
+                                <!-- Message -->
+                                <div class="form-group">                                            
+                                    <textarea name="message" id="message" class="input-md round form-control" style="height: 84px;" placeholder="Message"></textarea>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="clearfix">
+                            
+                            <div class="cf-left-col">
+                                
+                                <!-- Inform Tip -->                                        
+                                <div class="form-tip pt-20">
+                                    <i class="fa fa-info-circle"></i>&nbsp;Provide your designation and phone number if contacting on behalf of a college
+                                </div>
+                                
+                            </div>
+                            
+                            <div class="cf-right-col">
+                                
+                                <!-- Send Button -->
+                                <div class="align-right pt-10">
+                                    <button type="submit" class="submit_btn btn btn-mod btn-medium btn-round" id="submit_btn">Submit Message</button>
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                    <% end %>                    
+                </div>
+            </div>
+            <!-- End Contact Form -->
+            
+        </div>
+    </section>
+    <!-- End Contact Section -->    
+
+    
+</div>
+<!-- End Page Wrap -->    
+
+
+
+

@@ -1,0 +1,107 @@
+<div class="page" id="top">            
+    <!-- Home Section -->
+    <section class="home-section bg-dark-alfa-50 " style='background-color: #3498DB;' id="home">
+       <div class="container">            
+            <!-- Hero Content -->
+            <div class="home-content">
+                <div class="home-text" style="    padding: 100px 0px 45px 0px;">
+                    
+                    <h1 class="hs-line-8 no-transp font-alt mb-50 mb-xs-30">
+                       Verification
+                    </h1>                    
+                    <div class="local-scroll hidden-xs">
+                       <%= link_to "Apply", apply_path, :class => "btn btn-mod btn-border-w btn-medium btn-round" %>
+                        <span>&nbsp;</span>
+                        <%= link_to "Status", status_path, :class => "btn btn-mod btn-border-w btn-medium btn-round", :style =>"background: #fff;color: #111;border-color: transparent;" %>
+                        <span>&nbsp;</span>
+                        <%= link_to "Payment History", history_path, :class => "btn btn-mod btn-border-w btn-medium btn-round" %>
+                    </div>                    
+                </div>
+            </div>
+            <!-- End Hero Content -->            
+       </div>
+    </section>
+    <!-- End Home Section -->
+
+
+    <!-- Section -->
+    <section class="small-section" id="multi-page">
+        <div class="container relative">            
+            <!--<h2 class="section-title font-alt mb-60 mb-sm-30">
+                Multi Page Demo
+            </h2> -->            
+            <div class="row">
+                <div class="mb-40 table-responsive ">
+                    <%= form_tag(:status, :method => "get", :html => { :class => 'form contact-form', :id => 'contact_form'}) do %>
+                        <div class="clearfix">                                                  
+                            <div class="form-group row">
+                                <div class="col-md-5">
+                                    <input type="text" name="search_tag" id="search_tag" class="input-md round form-control" placeholder="Search by name or hallticket number">
+                                </div>
+                                <div class="col-md-2">
+                                    <%= submit_tag "Search", :class => "submit_btn btn btn-mod btn-medium btn-round"%>
+                                </div> 
+                            </div>
+                        </div>
+                    <% end %> 
+                    <% if @verifications.blank? %>    
+                        <div class="jumbotron align-center">
+                            <p>You have no documents submitted yet. Please <%= link_to "apply", apply_path%> for document verification  </p>
+                        </div>
+                    
+                    
+                    <%else%>
+                        <table class="table table-striped ">
+                            <thead style="background: dimgrey; color: white;">
+                              <tr>
+                                <th>S.No.</th>
+                                <th>Verification ID</th>
+                                <th><%= sortable "name", "Name" %></th>
+                                <th><%= sortable "hallticket_no", "HT Number/ Roll.No." %></th>
+                                <th>College</th>
+                                <th>Document</th>
+                                <!-- <th><%= sortable "amount", "Amount" %></th> -->
+                                <!-- <th>Service Tax</th> -->
+                                <th>Request Date</th>
+                                <th>Status</th>
+                                <th>Report Date</th>
+                                <th>Report</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            <% @verifications.each_with_index do |verification, i| %>
+                                <tr>
+                                    <td><%=i+1%></td>
+                                    <td style="text-transform: uppercase;"><%=verification.verification_token%></td>
+                                    <td><%=verification.name%></td>
+                                    <td style="text-transform: uppercase;"><%=verification.hallticket_no%></td>
+                                    <td><%=verification.college.name%></td>
+                                    <td><a href="<%=verification.document_link%> " target="blank"><i class="fa fa-download dark"></i></a>       </td>
+                                    <!-- <td><%=verification.amount%></td> -->
+                                    <!-- <td><%=verification.service_tax.round(2)%></td> -->
+                                    <td><%=local_time(verification.created_at + 330.minutes, '%d/%m/%Y %l:%M%p')%></td>
+                                    <td><%=verification.verification_status.description%></td>
+                                    <%if verification.verification_status_id != 1%>
+
+                                        <td><%=local_time(verification.updated_at + 330.minutes, '%d/%m/%Y %l:%M%p')%></td>
+                                        <td>
+                                            <a href="/final_report_user.pdf?verification_id=<%=verification.id%>" target="blank"><i class="fa fa-download dark"></i>&nbsp;</a>
+                                        </td>
+                                    <%else%>
+                                        <td></td>
+                                        <td></td>
+                                    <%end%>
+                                </tr>
+                            <% end %>
+                            </tbody>
+                        </table>
+                        <%= will_paginate @verifications %>
+
+                    <%end%>
+
+                </div> 
+            </div>            
+        </div>
+    </section>
+    <!-- End Section -->
+</div>

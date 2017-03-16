@@ -1,0 +1,62 @@
+<%= content_tag "div", id: "colleges", data: {url: @all_colleges } do %><% end %>
+<div class="page" id="top">
+	<!-- Head Section -->
+    <section class="small-section bg-dark-alfa-30 parallax-2" style='background-color: #3498DB;' >
+        <div class="relative container align-left">
+            
+            <div class="row">
+                
+                <div class="col-md-8" style="margin-top: 40px;">
+                    <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Search Colleges</h1>
+                    <div class="hs-line-4 font-alt">
+                        <input placeholder="Enter college name to filter" class="search-field-main form-control input-md round mb-xs-10" type="text" style="max-width: 100%;"/>
+                    </div>
+                </div>
+                
+                <!-- <div class="col-md-4 mt-30">
+                    <div class="mod-breadcrumbs font-alt align-right">
+                        <a href="#">Home</a>&nbsp;/&nbsp;<a href="#">Portfolio</a>&nbsp;/&nbsp;<span>Boxed</span>
+                    </div>
+                    
+                </div> -->
+            </div>
+            
+        </div>
+    </section>
+    <!-- End Head Section -->
+    
+    
+    <!-- Portfolio Section -->
+    <section class="page-section">
+        <div class="container relative">
+            
+            <!-- Works Grid -->
+            <ul class="works-grid work-grid-5 clearfix font-alt hover-white hide-titles" id="work-grid">
+                
+                <% @all_colleges.each do |college| %>
+                    <!-- Work Item (Lightbox) -->
+                    <li class="work-item mix college-box" data-college-id="<%=college.id%>" style="background-color: #3498DB;">
+                        <a href="/apply?college_id=<%=college.id%>&amp;college_name=<%=college.name%>" class="work-ext-link mfp-image align-center">
+                            <div class="work-img" style="min-height:130px;">
+                                <!-- <img alt="<%=college.name%>" /> -->
+                                <div class="pt-30" style="color: white; font-weight: bold;"><%=college.name%></div>
+                            </div>
+                            <div class="work-intro">
+                                <h3 class="work-title"><%=college.address%></h3>
+                                <div class="work-descr">
+                                    Ver. Amt. Rs <%=college.verification_amount%>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <!-- End Work Item -->
+                <% end %>
+                
+            </ul>
+            <!-- End Works Grid -->
+            
+        </div>
+    </section>
+    <!-- End Portfolio Section -->
+    
+</div>

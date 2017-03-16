@@ -1,0 +1,55 @@
+
+.scrollable-table{
+    table {
+        width: 100%;
+    }
+    thead {
+        display: block;
+        th {
+            height: 30px;
+            float: left;
+        }
+    }
+    tbody {
+        display: block;
+        height: 236px;
+        overflow-y: auto;
+        td {
+            float: left;
+        }
+    }
+    tr {
+        display: block;
+        &:after {
+            content: ' ';
+            display: block;
+            visibility: hidden;
+            clear: both;
+        }
+    }
+    td {
+        display: block;
+    }
+    th {
+        display: block;
+    }
+
+}
+
+/*
+.pretty th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.pretty th .asc {
+  background-image: url(/images/up_arrow.gif);
+}
+
+.pretty th .desc {
+  background-image: url(/images/down_arrow.gif);
+}
+*/ 
+
+    
